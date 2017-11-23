@@ -64,6 +64,9 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     /// If true, drawing circles is enabled
     var drawCirclesEnabled: Bool { get set }
     
+    /// Prevent circle drawing by index.
+    var circleIndexesNotToDraw: [Int] { get set }
+    
     /// - returns: `true` if drawing circles for this DataSet is enabled, `false` ifnot
     var isDrawCirclesEnabled: Bool { get }
     
