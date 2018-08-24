@@ -21,7 +21,7 @@ class ScatterChartViewController: DemoBaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.title = "Scatter Chart"
+        self.title = "Scatter Bar Chart"
         self.options = [.toggleValues,
                         .toggleHighlight,
                         .animateX,

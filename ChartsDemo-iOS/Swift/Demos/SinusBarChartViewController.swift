@@ -19,7 +19,7 @@ class SinusBarChartViewController: DemoBaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.title = "Sinus Bar Chart"
+        self.title = "Line Chart 2"
         self.options = [.toggleValues,
                         .toggleHighlight,
                         .animateX,

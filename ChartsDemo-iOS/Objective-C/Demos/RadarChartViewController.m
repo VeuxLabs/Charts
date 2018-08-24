@@ -30,7 +30,7 @@
     
     self.activities = @[ @"Burger", @"Steak", @"Salad", @"Pasta", @"Pizza" ];
     
-    self.title = @"Radar Chart";
+    self.title = @"Radar Bar Chart";
     
     self.options = @[
                      @{@"key": @"toggleValues", @"label": @"Toggle Values"},

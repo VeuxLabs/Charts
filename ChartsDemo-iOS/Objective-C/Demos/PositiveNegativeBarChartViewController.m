@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Positive/Negative Bar Chart";
+    self.title = @"Bar Chart";
     
     self.options = @[
                      @{@"key": @"toggleValues", @"label": @"Toggle Values"},

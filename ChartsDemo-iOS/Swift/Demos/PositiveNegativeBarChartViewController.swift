@@ -23,7 +23,7 @@ class PositiveNegativeBarChartViewController: DemoBaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.title = "Positive/Negative Bar Chart"
+        self.title = "Bar Chart"
         self.options = [.toggleValues,
                         .toggleHighlight,
                         .animateX,

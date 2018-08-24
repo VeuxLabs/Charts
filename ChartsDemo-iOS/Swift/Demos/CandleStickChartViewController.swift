@@ -21,7 +21,7 @@ class CandleStickChartViewController: DemoBaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.title = "Candle Stick Chart"
+        self.title = "Bubble Chart"
         self.options = [.toggleValues,
                         .toggleIcons,
                         .toggleHighlight,

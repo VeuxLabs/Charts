@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Pie Chart";
+    self.title = @"Pie Bar Chart";
     
     self.options = @[
                      @{@"key": @"toggleValues", @"label": @"Toggle Y-Values"},
