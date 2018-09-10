@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 #if !os(OSX)
-    import UIKit
+import UIKit
 #endif
 
 
@@ -194,7 +194,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
         
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         guard
             let dataProvider = dataProvider,

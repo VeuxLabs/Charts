@@ -67,7 +67,7 @@ open class RadarChartView: PieRadarChartViewBase
         
         self.highlighter = RadarHighlighter(chart: self)
     }
-
+    
     internal override func calcMinMax()
     {
         super.calcMinMax()
@@ -81,7 +81,7 @@ open class RadarChartView: PieRadarChartViewBase
     open override func notifyDataSetChanged()
     {
         calcMinMax()
-
+        
         _yAxisRenderer?.computeAxis(min: _yAxis._axisMinimum, max: _yAxis._axisMaximum, inverted: _yAxis.isInverted)
         _xAxisRenderer?.computeAxis(min: _xAxis._axisMinimum, max: _xAxis._axisMaximum, inverted: false)
         
@@ -100,7 +100,7 @@ open class RadarChartView: PieRadarChartViewBase
     open override func draw(_ rect: CGRect)
     {
         super.draw(rect)
-
+        
         guard data != nil, let renderer = renderer else { return }
         
         let optionalContext = NSUIGraphicsGetCurrentContext()
@@ -122,12 +122,12 @@ open class RadarChartView: PieRadarChartViewBase
         {
             _yAxisRenderer.renderLimitLines(context: context)
         }
-
+        
         renderer.drawData(context: context)
-
+        
         if valuesToHighlight()
         {
-            renderer.drawHighlighted(context: context, indices: _indicesToHighlight)
+            renderer.drawHighlighted(context: context, indices: _indicesToHighlight, darkerIndices: [])
         }
         
         if _yAxis.isEnabled && !_yAxis.isDrawLimitLinesBehindDataEnabled
@@ -136,30 +136,30 @@ open class RadarChartView: PieRadarChartViewBase
         }
         
         _yAxisRenderer.renderAxisLabels(context: context)
-
+        
         renderer.drawValues(context: context)
-
+        
         legendRenderer.renderLegend(context: context)
-
+        
         drawDescription(context: context)
-
+        
         drawMarkers(context: context)
     }
-
+    
     /// - returns: The factor that is needed to transform values into pixels.
     @objc open var factor: CGFloat
     {
         let content = _viewPortHandler.contentRect
         return min(content.width / 2.0, content.height / 2.0)
-                / CGFloat(_yAxis.axisRange)
+            / CGFloat(_yAxis.axisRange)
     }
-
+    
     /// - returns: The angle that each slice in the radar chart occupies.
     @objc open var sliceAngle: CGFloat
     {
         return 360.0 / CGFloat(_data?.maxEntryCountSet?.entryCount ?? 0)
     }
-
+    
     open override func indexForAngle(_ angle: CGFloat) -> Int
     {
         // take the current angle of the chart into consideration
@@ -184,17 +184,17 @@ open class RadarChartView: PieRadarChartViewBase
         
         return index
     }
-
+    
     /// - returns: The object that represents all y-labels of the RadarChart.
     @objc open var yAxis: YAxis
     {
         return _yAxis
     }
-
+    
     /// Sets the number of web-lines that should be skipped on chart web before the next one is drawn. This targets the lines that come from the center of the RadarChart.
     /// if count = 1 -> 1 line is skipped in between
     @objc open var skipWebLineCount: Int
-    {
+        {
         get
         {
             return _skipWebLineCount
@@ -209,18 +209,18 @@ open class RadarChartView: PieRadarChartViewBase
     {
         return _legend.font.pointSize * 4.0
     }
-
+    
     internal override var requiredBaseOffset: CGFloat
     {
         return _xAxis.isEnabled && _xAxis.isDrawLabelsEnabled ? _xAxis.labelRotatedWidth : 10.0
     }
-
+    
     open override var radius: CGFloat
     {
         let content = _viewPortHandler.contentRect
         return min(content.width / 2.0, content.height / 2.0)
     }
-
+    
     /// - returns: The maximum value this chart can display on it's y-axis.
     open override var chartYMax: Double { return _yAxis._axisMaximum }
     

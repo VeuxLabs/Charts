@@ -41,7 +41,7 @@ open class CombinedChartRenderer: DataRenderer
         _renderers = [DataRenderer]()
         
         guard let chart = chart else { return }
-
+        
         for order in drawOrder
         {
             switch (order)
@@ -82,7 +82,7 @@ open class CombinedChartRenderer: DataRenderer
                 break
             }
         }
-
+        
     }
     
     open override func initBuffers()
@@ -117,7 +117,7 @@ open class CombinedChartRenderer: DataRenderer
         }
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         for renderer in _renderers
         {
@@ -148,10 +148,10 @@ open class CombinedChartRenderer: DataRenderer
             
             let dataIndices = indices.filter{ $0.dataIndex == dataIndex || $0.dataIndex == -1 }
             
-            renderer.drawHighlighted(context: context, indices: dataIndices)
+            renderer.drawHighlighted(context: context, indices: dataIndices, darkerIndices: [])
         }
     }
-
+    
     /// - returns: The sub-renderer object at the specified index.
     @objc open func getSubRenderer(index: Int) -> DataRenderer?
     {
@@ -164,10 +164,10 @@ open class CombinedChartRenderer: DataRenderer
             return _renderers[index]
         }
     }
-
+    
     /// - returns: All sub-renderers.
     @objc open var subRenderers: [DataRenderer]
-    {
+        {
         get { return _renderers }
         set { _renderers = newValue }
     }
@@ -184,7 +184,7 @@ open class CombinedChartRenderer: DataRenderer
     /// The earlier you place them in the provided array, the further they will be in the background.
     /// e.g. if you provide [DrawOrder.Bar, DrawOrder.Line], the bars will be drawn behind the lines.
     open var drawOrder: [CombinedChartView.DrawOrder]
-    {
+        {
         get
         {
             return _drawOrder

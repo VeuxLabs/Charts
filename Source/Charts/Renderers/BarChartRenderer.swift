@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 #if !os(OSX)
-    import UIKit
+import UIKit
 #endif
 
 open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
@@ -76,7 +76,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             else { return }
         
         let barWidthHalf = barData.barWidth / 2.0
-    
+        
         let buffer = _buffers[index]
         var bufferIndex = 0
         let containsStacks = dataSet.isStacked
@@ -324,11 +324,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     
     open func prepareBarHighlight(
         x: Double,
-          y1: Double,
-          y2: Double,
-          barWidthHalf: Double,
-          trans: Transformer,
-          rect: inout CGRect)
+        y1: Double,
+        y2: Double,
+        barWidthHalf: Double,
+        trans: Transformer,
+        rect: inout CGRect)
     {
         let left = x - barWidthHalf
         let right = x + barWidthHalf
@@ -342,7 +342,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         
         trans.rectValueToPixel(&rect, phaseY: animator.phaseY )
     }
-
+    
     open override func drawValues(context: CGContext)
     {
         // if values are drawn
@@ -352,14 +352,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 let dataProvider = dataProvider,
                 let barData = dataProvider.barData
                 else { return }
-
+            
             var dataSets = barData.dataSets
-
+            
             let valueOffsetPlus: CGFloat = 4.5
             var posOffset: CGFloat
             var negOffset: CGFloat
             let drawValueAboveBar = dataProvider.isDrawValueAboveBarEnabled
-
+            
             for dataSetIndex in 0 ..< barData.dataSetCount
             {
                 guard let dataSet = dataSets[dataSetIndex] as? IBarChartDataSet else { continue }
@@ -392,7 +392,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 let phaseY = animator.phaseY
                 
                 let iconsOffset = dataSet.iconsOffset
-        
+                
                 // if only single values are drawn (sum)
                 if !dataSet.isStacked
                 {
@@ -616,7 +616,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight] = [Highlight]())
     {
         guard
             let dataProvider = dataProvider,
@@ -645,6 +645,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 context.setFillColor(set.highlightColor.cgColor)
                 context.setAlpha(set.highlightAlpha)
+                for darkerIndex in darkerIndices {
+                    if darkerIndex.x == high.x {
+                        context.setFillColor(UIColor.green.cgColor)
+                        context.setAlpha(1.0)
+                    }
+                }
+                
                 
                 let isStack = high.stackIndex >= 0 && e.isStacked
                 

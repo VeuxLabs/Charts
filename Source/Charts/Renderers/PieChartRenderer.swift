@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 #if !os(OSX)
-    import UIKit
+import UIKit
 #endif
 
 
@@ -104,7 +104,7 @@ open class PieChartRenderer: DataRenderer
         
         return sliceSpace
     }
-
+    
     @objc open func drawDataSet(context: CGContext, dataSet: IPieChartDataSet)
     {
         guard let chart = chart else {return }
@@ -133,7 +133,7 @@ open class PieChartRenderer: DataRenderer
         }
         
         let sliceSpace = visibleAngleCount <= 1 ? 0.0 : getSliceSpace(dataSet: dataSet)
-
+        
         context.saveGState()
         
         for j in 0 ..< entryCount
@@ -164,14 +164,14 @@ open class PieChartRenderer: DataRenderer
                     
                     let arcStartPointX = center.x + radius * cos(startAngleOuter.DEG2RAD)
                     let arcStartPointY = center.y + radius * sin(startAngleOuter.DEG2RAD)
-
+                    
                     let path = CGMutablePath()
                     
                     path.move(to: CGPoint(x: arcStartPointX,
                                           y: arcStartPointY))
                     
                     path.addRelativeArc(center: center, radius: radius, startAngle: startAngleOuter.DEG2RAD, delta: sweepAngleOuter.DEG2RAD)
-
+                    
                     if drawInnerArc &&
                         (innerRadius > 0.0 || accountForSliceSpacing)
                     {
@@ -225,7 +225,7 @@ open class PieChartRenderer: DataRenderer
                                     arcStartPointY: arcStartPointY,
                                     startAngle: startAngleOuter,
                                     sweepAngle: sweepAngleOuter)
-
+                            
                             let arcEndPointX = center.x + sliceSpaceOffset * cos(angleMiddle.DEG2RAD)
                             let arcEndPointY = center.y + sliceSpaceOffset * sin(angleMiddle.DEG2RAD)
                             
@@ -338,7 +338,7 @@ open class PieChartRenderer: DataRenderer
                 
                 // offset needed to center the drawn text in the slice
                 let angleOffset = (sliceAngle - sliceSpaceMiddleAngle / 2.0) / 2.0
-
+                
                 angle = angle + angleOffset
                 
                 let transformedAngle = rotationAngle + angle * CGFloat(phaseY)
@@ -474,7 +474,7 @@ open class PieChartRenderer: DataRenderer
                     // calculate the text position
                     let x = labelRadius * sliceXBase + center.x
                     let y = labelRadius * sliceYBase + center.y - lineHeight
-                 
+                    
                     if drawXInside && drawYInside
                     {
                         ChartUtils.drawText(
@@ -539,7 +539,7 @@ open class PieChartRenderer: DataRenderer
                                          y: y,
                                          size: icon.size)
                 }
-
+                
                 xIndex += 1
             }
         }
@@ -644,7 +644,7 @@ open class PieChartRenderer: DataRenderer
             drawingRect.size = textBounds.size
             
             context.saveGState()
-
+            
             let clippingPath = CGPath(ellipseIn: holeRect, transform: nil)
             context.beginPath()
             context.addPath(clippingPath)
@@ -656,7 +656,7 @@ open class PieChartRenderer: DataRenderer
         }
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         guard
             let chart = chart,
@@ -693,7 +693,7 @@ open class PieChartRenderer: DataRenderer
             {
                 continue
             }
-
+            
             let entryCount = set.entryCount
             var visibleAngleCount = 0
             for j in 0 ..< entryCount
@@ -725,7 +725,7 @@ open class PieChartRenderer: DataRenderer
             let accountForSliceSpacing = sliceSpace > 0.0 && sliceAngle <= 180.0
             
             context.setFillColor(set.highlightColor?.cgColor ?? set.color(atIndex: index).cgColor)
-
+            
             let sliceSpaceAngleOuter = visibleAngleCount == 1 ?
                 0.0 :
                 sliceSpace / radius.DEG2RAD

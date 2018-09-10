@@ -13,14 +13,14 @@ import Foundation
 import CoreGraphics
 
 #if !os(OSX)
-    import UIKit
+import UIKit
 #endif
 
 
 open class RadarChartRenderer: LineRadarRenderer
 {
     @objc open weak var chart: RadarChartView?
-
+    
     @objc public init(chart: RadarChartView, animator: Animator, viewPortHandler: ViewPortHandler)
     {
         super.init(animator: animator, viewPortHandler: viewPortHandler)
@@ -187,7 +187,7 @@ open class RadarChartRenderer: LineRadarRenderer
                         point: CGPoint(x: p.x, y: p.y - yoffset - valueFont.lineHeight),
                         align: .center,
                         attributes: [NSAttributedString.Key.font: valueFont,
-                            NSAttributedString.Key.foregroundColor: dataSet.valueTextColorAt(j)]
+                                     NSAttributedString.Key.foregroundColor: dataSet.valueTextColorAt(j)]
                     )
                 }
                 
@@ -239,7 +239,7 @@ open class RadarChartRenderer: LineRadarRenderer
         
         let xIncrements = 1 + chart.skipWebLineCount
         let maxEntryCount = chart.data?.maxEntryCountSet?.entryCount ?? 0
-
+        
         for i in stride(from: 0, to: maxEntryCount, by: xIncrements)
         {
             let p = center.moving(distance: CGFloat(chart.yRange) * factor,
@@ -265,7 +265,7 @@ open class RadarChartRenderer: LineRadarRenderer
             for i in 0 ..< data.entryCount
             {
                 let r = CGFloat(chart.yAxis.entries[j] - chart.chartYMin) * factor
-
+                
                 let p1 = center.moving(distance: r, atAngle: sliceangle * CGFloat(i) + rotationangle)
                 let p2 = center.moving(distance: r, atAngle: sliceangle * CGFloat(i + 1) + rotationangle)
                 
@@ -282,8 +282,8 @@ open class RadarChartRenderer: LineRadarRenderer
     }
     
     private var _highlightPointBuffer = CGPoint()
-
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         guard
             let chart = chart,
@@ -388,7 +388,7 @@ open class RadarChartRenderer: LineRadarRenderer
             context.setFillColor(fillColor.cgColor)
             context.fillPath(using: .evenOdd)
         }
-            
+        
         if let strokeColor = strokeColor
         {
             context.beginPath()

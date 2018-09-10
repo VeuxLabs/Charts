@@ -20,10 +20,10 @@ open class DataRenderer: Renderer
     @objc public init(animator: Animator, viewPortHandler: ViewPortHandler)
     {
         self.animator = animator
-
+        
         super.init(viewPortHandler: viewPortHandler)
     }
-
+    
     @objc open func drawData(context: CGContext)
     {
         fatalError("drawData() cannot be called on DataRenderer")
@@ -42,7 +42,7 @@ open class DataRenderer: Renderer
     /// Draws all highlight indicators for the values that are currently highlighted.
     ///
     /// - parameter indices: the highlighted values
-    @objc open func drawHighlighted(context: CGContext, indices: [Highlight])
+    @objc open func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         fatalError("drawHighlighted() cannot be called on DataRenderer")
     }

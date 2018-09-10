@@ -13,7 +13,7 @@ import Foundation
 import CoreGraphics
 
 #if !os(OSX)
-    import UIKit
+import UIKit
 #endif
 
 
@@ -31,7 +31,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     open override func drawData(context: CGContext)
     {
         guard let dataProvider = dataProvider, let candleData = dataProvider.candleData else { return }
-
+        
         for set in candleData.dataSets as! [ICandleChartDataSet]
         {
             if set.isVisible
@@ -51,7 +51,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     @objc open func drawDataSet(context: CGContext, dataSet: ICandleChartDataSet)
     {
         guard let dataProvider = dataProvider else { return }
-
+        
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
         
         let phaseY = animator.phaseY
@@ -191,12 +191,12 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
                 _rangePoints[0].y = CGFloat(high * phaseY)
                 _rangePoints[1].x = CGFloat(xPos)
                 _rangePoints[1].y = CGFloat(low * phaseY)
-
+                
                 _openPoints[0].x = CGFloat(xPos) - 0.5 + barSpace
                 _openPoints[0].y = CGFloat(open * phaseY)
                 _openPoints[1].x = CGFloat(xPos)
                 _openPoints[1].y = CGFloat(open * phaseY)
-
+                
                 _closePoints[0].x = CGFloat(xPos) + 0.5 - barSpace
                 _closePoints[0].y = CGFloat(close * phaseY)
                 _closePoints[1].x = CGFloat(xPos)
@@ -323,7 +323,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     {
     }
     
-    open override func drawHighlighted(context: CGContext, indices: [Highlight])
+    open override func drawHighlighted(context: CGContext, indices: [Highlight], darkerIndices: [Highlight])
     {
         guard
             let dataProvider = dataProvider,

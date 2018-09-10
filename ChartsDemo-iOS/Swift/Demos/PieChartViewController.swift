@@ -102,7 +102,7 @@ class PieChartViewController: DemoBaseViewController {
         data.setValueTextColor(.white)
         
         chartView.data = data
-        chartView.highlightValues(nil)
+        chartView.highlightValues(nil, nil)
     }
     
     override func optionTapped(_ option: Option) {
