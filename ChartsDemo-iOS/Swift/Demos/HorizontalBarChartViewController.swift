@@ -102,6 +102,7 @@ class HorizontalBarChartViewController: DemoBaseViewController {
         
         let set1 = BarChartDataSet(values: yVals, label: "DataSet")
         set1.drawIconsEnabled = false
+        set1.secondaryHighlightColor = UIColor.init(red: 20, green: 211, blue: 33, alpha: 1.0)
         
         let data = BarChartData(dataSet: set1)
         data.setValueFont(UIFont(name:"HelveticaNeue-Light", size:10)!)

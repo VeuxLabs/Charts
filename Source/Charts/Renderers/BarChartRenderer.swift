@@ -647,7 +647,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 context.setAlpha(set.highlightAlpha)
                 for darkerIndex in darkerIndices {
                     if darkerIndex.x == high.x {
-                        context.setFillColor(UIColor.green.cgColor)
+                        context.setFillColor(set.secondaryHighlightColor.cgColor)
                         context.setAlpha(1.0)
                     }
                 }

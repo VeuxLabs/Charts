@@ -20,6 +20,7 @@ public protocol IBarLineScatterCandleBubbleChartDataSet: IChartDataSet
     // MARK: - Styling functions and accessors
     
     var highlightColor: NSUIColor { get set }
+    var secondaryHighlightColor: NSUIColor { get set }
     var highlightLineWidth: CGFloat { get set }
     var highlightLineDashPhase: CGFloat { get set }
     var highlightLineDashLengths: [CGFloat]? { get set }
